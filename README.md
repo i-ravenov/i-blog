@@ -1,2 +1,2 @@
 # i-blog
-a simple blog
+a blog powered by ASP.net MVC
