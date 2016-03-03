@@ -1,14 +1,16 @@
-﻿﻿@{
+﻿@using System.Web.Optimization
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 
 <html>
-<head>
-    <title>@ViewBag.Title - it-blog</title>
-</head>
-<body>
+    <head>
+        <title>@ViewBag.Title - it-blog</title>
+        @Styles.Render("~/styles")
+    </head>
+    <body>
 
     <header>
         <h1>
@@ -37,7 +39,7 @@
     <footer>
         &copy; @DateTime.UtcNow.Year - it-blog
     </footer>
-
-    @RenderSection("Scripts", false)
-</body>
+        @Scripts.Render("~/scripts")
+        @RenderSection("Scripts", false)
+    </body>
 </html>
