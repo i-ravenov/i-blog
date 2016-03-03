@@ -7,7 +7,7 @@ namespace it_blog.Areas.Admin.Controllers
     {
         public ActionResult Index()
         {
-            return Content("USERS!");
+            return View();
         }
     }
 }

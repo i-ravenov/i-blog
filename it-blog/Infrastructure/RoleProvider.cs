@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace it_blog.Infrastructure.RoleProvider
+namespace it_blog.Infrastructure
 {
     public class RoleProvider : System.Web.Security.RoleProvider
     {
