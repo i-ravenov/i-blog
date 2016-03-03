@@ -1,12 +1,12 @@
 ﻿using System.Web.Mvc;
 
-namespace i_blog.Controllers
+namespace it_blog.Areas.Admin.Controllers
 {
     public class PostsController : Controller
     {
         public ActionResult Index()
         {
-            return View();
+            return Content("ADMIN POSTS!");
         }
     }
 }

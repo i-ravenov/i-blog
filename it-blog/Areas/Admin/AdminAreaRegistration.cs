@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace i_blog.Areas.Admin
+namespace it_blog.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration
     {

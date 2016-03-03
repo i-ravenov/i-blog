@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace i_blog.Controllers
+namespace it_blog.Controllers
 {
     public class AuthController : Controller
     {

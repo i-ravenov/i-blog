@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using i_blog.Controllers;
+using it_blog.Controllers;
 
-namespace i_blog
+namespace it_blog
 {
     public class RouteConfig
     {

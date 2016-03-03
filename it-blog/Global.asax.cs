@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace i_blog
+namespace it_blog
 {
     public class MvcApplication : System.Web.HttpApplication
     {
