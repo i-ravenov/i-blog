@@ -47,7 +47,8 @@
                 <i class="glyphicon glyphicon-remove"></i>
                 Delete
             </a> |
-            @Html.ActionLink("Details", "details", new { id = item.UserID }) 
+            @Html.ActionLink("Details", "details", new {id = item.UserID}) |
+            @Html.ActionLink("Reset Password", "resetpassword", new { id = item.UserID })
             
         </td>
     </tr>

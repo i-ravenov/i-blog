@@ -7,6 +7,8 @@ namespace i_blog.Models
 {
     public class User
     {
+        private const int workFactor = 13;
+
         public User() { }
         public int UserID { get; set; }
         public string Username { get; set; }
@@ -16,7 +18,12 @@ namespace i_blog.Models
 
         public void SetPassword(string password)
         {
-            PasswordHash = "Ignore me !";
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(password, workFactor);
+        }
+
+        public bool CheckPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, PasswordHash);
         }
 
     }

@@ -12,7 +12,6 @@ namespace i_blog.Controllers
             return RedirectToRoute("home");
         }
 
-
         public ActionResult Login()
         {
             return View(new AuthLogin());
@@ -23,7 +22,7 @@ namespace i_blog.Controllers
         {
             if (!ModelState.IsValid)
                 return View(form);
-
+            
             FormsAuthentication.SetAuthCookie(form.Username, true);
             
             if (!string.IsNullOrWhiteSpace(returnUrl))
