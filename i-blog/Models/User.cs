@@ -16,6 +16,12 @@ namespace i_blog.Models
         public string PasswordHash { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
 
+        public static void FakeHash()
+        {
+            BCrypt.Net.BCrypt.HashPassword("", workFactor);
+        }
+
+
         public void SetPassword(string password)
         {
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(password, workFactor);

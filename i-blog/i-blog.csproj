@@ -174,7 +174,6 @@
     <Content Include="Content\Styles\bootstrap.css" />
     <Content Include="Content\Styles\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="LICENSE.txt" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
