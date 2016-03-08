@@ -14,5 +14,10 @@ namespace i_blog.Models
         public string PasswordHash { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
 
+        public void SetPassword(string password)
+        {
+            PasswordHash = "Ignore me !";
+        }
+
     }
 }
