@@ -1,7 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using i_blog.Models;
 
 namespace i_blog.Areas.Admin.ViewModels
 {
+    public class IndexUser
+    {
+        public IEnumerable<User> Users { get; set; }
+    }
+
     public class NewUser
     {
         [Required, MaxLength(128)]

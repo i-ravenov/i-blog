@@ -1,4 +1,5 @@
-﻿@model IEnumerable<i_blog.Models.User>
+﻿@model i_blog.Areas.Admin.ViewModels.IndexUser
+
 
 @{
     ViewBag.Title = "Users";
@@ -11,47 +12,39 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Roles)
-        </th>
-        <th></th>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Roles</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            { todo }
-        </td>
-        <td>
-            
-            @Html.ActionLink("Edit", "edit", new { id = item.UserID }) |
-            <a href="@Url.Action("delete", new{id = item.UserID})" class="btn btn-xs btn-danger" data-post="Are you sure you want to delete @item.Username?">
-                <i class="glyphicon glyphicon-remove"></i>
-                Delete
-            </a> |
-            @Html.ActionLink("Details", "details", new {id = item.UserID}) |
-            @Html.ActionLink("Reset Password", "resetpassword", new { id = item.UserID })
-            
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Users)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                { todo }
+            </td>
+            <td>
+
+                @Html.ActionLink("Edit", "edit", new { id = item.UserID }) |
+                <a href="@Url.Action("delete", new{id = item.UserID})" class="btn btn-xs btn-danger" data-post="Are you sure you want to delete @item.Username?">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    Delete
+                </a> |
+                @Html.ActionLink("Details", "details", new { id = item.UserID }) |
+                @Html.ActionLink("Reset Password", "resetpassword", new { id = item.UserID })
+
+            </td>
+        </tr>
+    }
 
 </table>

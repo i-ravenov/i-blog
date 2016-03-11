@@ -15,15 +15,16 @@ namespace i_blog.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(new IndexUser
+            {
+                Users = db.Users.ToList()
+            });
         }
 
 
         public ActionResult New()
         {
-            return View(new NewUser
-            {
-            });
+            return View(new NewUser());
         }
 
         [HttpPost]
