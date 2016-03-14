@@ -31,12 +31,12 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                { todo }
+                @string.Join(", ", item.Roles.Select(role => role.Name))
             </td>
             <td>
 
                 @Html.ActionLink("Edit", "edit", new { id = item.UserID }) |
-                <a href="@Url.Action("delete", new{id = item.UserID})" class="btn btn-xs btn-danger" data-post="Are you sure you want to delete @item.Username?">
+                <a href="@Url.Action("delete", new { id = item.UserID })" class="btn btn-xs btn-danger" data-post="Are you sure you want to delete @item.Username?">
                     <i class="glyphicon glyphicon-remove"></i>
                     Delete
                 </a> |

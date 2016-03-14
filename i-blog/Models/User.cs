@@ -9,12 +9,17 @@ namespace i_blog.Models
     {
         private const int workFactor = 13;
 
-        public User() { }
         public int UserID { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+
+        public User()
+        {
+            Roles = new List<Role>();
+        }
+
 
         public static void FakeHash()
         {

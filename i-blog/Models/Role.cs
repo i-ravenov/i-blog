@@ -5,9 +5,7 @@ namespace i_blog.Models
     public class Role
     {
         public Role()
-        {
-            
-        }
+        {}
 
         public Role(string name)
         {

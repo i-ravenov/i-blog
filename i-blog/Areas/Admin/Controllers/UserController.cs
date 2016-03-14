@@ -1,4 +1,6 @@
-﻿using System.Data.Entity.Migrations;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -24,23 +26,32 @@ namespace i_blog.Areas.Admin.Controllers
 
         public ActionResult New()
         {
-            return View(new NewUser());
+            return View(new NewUser
+            {
+                Roles = db.Roles.Select(role => new RoleCheckbox
+                {
+                    Id = role.RoleID,
+                    IsChecked = false,
+                    Name = role.Name
+                }).ToList()
+
+            });
         }
 
         [HttpPost]
         public ActionResult New(NewUser form)
         {
+            var user = new User();
+            SyncRoles(form.Roles, user.Roles);
+
             if (db.Users.Any(u => u.Username == form.Username) )
                 ModelState.AddModelError("Username", "Username must be unique");
 
             if (!ModelState.IsValid)
                 return View(form);
 
-            var user = new User
-            {
-                Email = form.Email,
-                Username = form.Username
-            };
+            user.Email = form.Email;
+            user.Username = form.Username;
 
             user.SetPassword(form.Password);
 
@@ -69,11 +80,33 @@ namespace i_blog.Areas.Admin.Controllers
             var user = db.Users.Find(id);
             if (user == null)
                 return HttpNotFound();
-            return View(new EditUser
+
+            var checkboxes = new List<RoleCheckbox>();
+
+            //foreach (var role in db.Roles)
+            //{
+            //    checkboxes.Add(new RoleCheckbox
+            //    {
+            //        Id = role.RoleID,
+            //        IsChecked = db.Roles.Any( r => r.RoleID == role.RoleID),
+            //        Name = role.Name
+            //    });
+            //}
+        
+
+            EditUser edtiViewModel = new EditUser
             {
                 Username = user.Username,
-                Email = user.Email
-            });
+                Email = user.Email,
+                Roles = db.Roles.Select(r => new RoleCheckbox
+                {
+                    Id = r.RoleID,
+                    IsChecked = false,
+                    Name = r.Name
+                }).ToList()
+            };
+
+            return View(edtiViewModel);
         }
 
         [HttpPost]
@@ -82,11 +115,15 @@ namespace i_blog.Areas.Admin.Controllers
             var user = db.Users.Find(id);
             if (user == null)
                 return HttpNotFound();
+
+            SyncRoles(form.Roles, user.Roles);
+
             if (db.Users.Any(u => u.Username == form.Username && u.UserID != id ) )
                 ModelState.AddModelError("Username", "Username must be unique");
 
             if (!ModelState.IsValid)
                 return View(form);
+
 
             user.Username = form.Username;
             user.Email = form.Email;
@@ -144,6 +181,30 @@ namespace i_blog.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("index");
         }
+
+
+        private void SyncRoles(IList<RoleCheckbox> checkboxes, ICollection<Role> roles)
+        {
+            var selectedRoles = new List<Role>();
+
+            foreach (var role in db.Roles)
+            {
+                var checkbox = checkboxes.Single(c => c.Id == role.RoleID);
+                checkbox.Name = role.Name;
+
+                if (checkbox.IsChecked)
+                    selectedRoles.Add(role);
+            }
+
+            foreach (var toadd in selectedRoles.Where(t => !roles.Contains(t)))
+                roles.Add(toadd);
+
+            foreach (var toRemove in roles.Where(t => !selectedRoles.Contains(t)).ToList())
+                roles.Remove(toRemove);
+
+            db.SaveChanges();
+        }
+
 
         protected override void Dispose(bool disposing)
         {

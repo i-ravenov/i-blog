@@ -10,8 +10,22 @@ namespace i_blog.Areas.Admin.ViewModels
         public IEnumerable<User> Users { get; set; }
     }
 
+    public class RoleCheckbox
+    {
+        public int Id { get; set; }
+        public bool IsChecked { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class RoleCheckboxCollection
+    {
+        public IList<RoleCheckbox> RCCollection { get; set; } 
+    }
+
     public class NewUser
     {
+        public IList<RoleCheckbox> Roles { get; set; }
+
         [Required, MaxLength(128)]
         public string Username { get; set; }
 
@@ -24,6 +38,8 @@ namespace i_blog.Areas.Admin.ViewModels
 
     public class EditUser
     {
+        public IList<RoleCheckbox> Roles { get; set; }
+
         [Required, MaxLength(128)]
         public string Username { get; set; }
 
