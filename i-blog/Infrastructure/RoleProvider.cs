@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Linq;
+using i_blog.DAL;
 
 namespace i_blog.Infrastructure
 {
     public class RoleProvider : System.Web.Security.RoleProvider
     {
+        private BlogContext db = new BlogContext();
+
         public override string[] GetRolesForUser(string username)
         {
-            if (username == "ivan")
-                return new[] { "admin" };
-            return new string[] { };
+            if (!db.Users.Any(u => u.Username == username))
+                return new string[] {};
+            var user = db.Users.SingleOrDefault(u => u.Username == username);
+            return user.Roles.Select(r => r.Name ).ToArray();
         }
 
         public override bool IsUserInRole(string username, string roleName)
