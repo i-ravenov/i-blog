@@ -95,5 +95,43 @@ namespace i_blog.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Trash(int id)
+        {
+            var post = db.Posts.Find(id);
+            if (post == null)
+                return HttpNotFound();
+
+            post.DeletedAt = DateTime.UtcNow;
+            db.Posts.AddOrUpdate(post);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var post = db.Posts.Find(id);
+            if (post == null)
+                return HttpNotFound();
+
+            db.Posts.Remove(post);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Restore(int id)
+        {
+            var post = db.Posts.Find(id);
+            if (post == null)
+                return HttpNotFound();
+
+            post.DeletedAt = null;
+            db.Posts.AddOrUpdate(post);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }
