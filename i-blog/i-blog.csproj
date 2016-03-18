@@ -222,7 +222,18 @@
     </Compile>
     <Compile Include="Infrastructure\RoleProvider.cs" />
     <Compile Include="Infrastructure\SelectedTabAttribute.cs" />
+    <Compile Include="Migrations\201603171318422_Add Roles and Tags.cs" />
+    <Compile Include="Migrations\201603171318422_Add Roles and Tags.Designer.cs">
+      <DependentUpon>201603171318422_Add Roles and Tags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603181535332_UserId foreign key for Posts.cs" />
+    <Compile Include="Migrations\201603181535332_UserId foreign key for Posts.Designer.cs">
+      <DependentUpon>201603181535332_UserId foreign key for Posts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Auth.cs" />
@@ -258,6 +269,14 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603171318422_Add Roles and Tags.resx">
+      <DependentUpon>201603171318422_Add Roles and Tags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603181535332_UserId foreign key for Posts.resx">
+      <DependentUpon>201603181535332_UserId foreign key for Posts.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

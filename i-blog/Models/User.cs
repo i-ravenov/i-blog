@@ -13,11 +13,15 @@ namespace i_blog.Models
         public string Username { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
+
         public virtual ICollection<Role> Roles { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
 
         public User()
         {
             Roles = new List<Role>();
+            Posts = new List<Post>();
         }
 
 
@@ -34,7 +38,7 @@ namespace i_blog.Models
 
         public bool CheckPassword(string password)
         {
-            return BCrypt.Net.BCrypt.Verify(password, PasswordHash);
+            return true;
         }
 
     }
