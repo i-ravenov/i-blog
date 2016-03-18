@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Web.Mvc;
 using i_blog.Areas.Admin.ViewModels;
 using i_blog.DAL;
 using i_blog.Infrastructure;
+using i_blog.Infrastructure.Extensions;
 using i_blog.Models;
 
 namespace i_blog.Areas.Admin.Controllers
@@ -38,7 +40,14 @@ namespace i_blog.Areas.Admin.Controllers
         {
             return View("form", new PostsForm
             {
-                IsNew = true
+                IsNew = true,
+                Tags = db.Tags.Select(tag => new TagCheckbox
+                {
+                    Id = tag.TagId,
+                    Name = tag.Name,
+                    IsChecked = false
+                }).ToList()
+
             });
         }
 
@@ -54,7 +63,13 @@ namespace i_blog.Areas.Admin.Controllers
                 PostId = id,
                 Content = post.Content,
                 Slug = post.Slug,
-                Title = post.Title
+                Title = post.Title,
+                Tags = db.Tags.Select(tag => new TagCheckbox
+                {
+                    Id = tag.TagId,
+                    Name = tag.Name,
+                    IsChecked = post.Tags.Contains(tag)
+                }).ToList()
             });
         }
 
@@ -65,6 +80,8 @@ namespace i_blog.Areas.Admin.Controllers
 
             if (!ModelState.IsValid)
                 return View(form);
+
+            var selectedTags = ReconsileTags(form.Tags).ToList();
 
             Post post;
             if (form.IsNew)
@@ -83,6 +100,12 @@ namespace i_blog.Areas.Admin.Controllers
                     return HttpNotFound();
 
                 post.UpdatedAt = DateTime.UtcNow;
+                foreach (var toAdd in selectedTags.Where(t => !post.Tags.Contains(t)))
+                    post.Tags.Add(toAdd);
+
+                foreach (var toRemove in post.Tags.Where(t => !selectedTags.Contains(t)).ToList())
+                    post.Tags.Remove(toRemove);
+
             }
 
             post.Title = form.Title;
@@ -131,6 +154,35 @@ namespace i_blog.Areas.Admin.Controllers
             db.Posts.AddOrUpdate(post);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private IEnumerable<Tag> ReconsileTags(IEnumerable<TagCheckbox> tags)
+        {
+            foreach (var tag in tags.Where(t => t.IsChecked))
+            {
+                if (tag.Id != null)
+                {
+                    yield return db.Tags.Find(tag.Id);
+                    continue;
+                }
+
+                var existingTag = db.Tags.SingleOrDefault(t => t.Name == tag.Name);
+                if (existingTag != null)
+                {
+                    yield return existingTag;
+                    continue;
+                }
+
+                var newTag = new Tag
+                {
+                    Name = tag.Name,
+                    Slug = tag.Name.Slugify()
+                };
+
+                db.Tags.AddOrUpdate(newTag);
+                db.SaveChanges();
+                yield return newTag;
+            }
         }
 
     }
