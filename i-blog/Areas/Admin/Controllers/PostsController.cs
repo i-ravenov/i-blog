@@ -68,12 +68,12 @@ namespace i_blog.Areas.Admin.Controllers
                 {
                     Id = tag.TagId,
                     Name = tag.Name,
-                    IsChecked = post.Tags.Contains(tag)
+                    IsChecked = true        // must be reimplemented !!!
                 }).ToList()
             });
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Form(PostsForm form)
         {
             form.IsNew = form.PostId == null;
