@@ -1,4 +1,6 @@
-﻿﻿@{
+﻿@model i_blog.ViewModels.PostsIndex
+
+@{
     ViewBag.Title = "Index";
 }
 
@@ -9,6 +11,8 @@
     <a href="@Url.RouteUrl("login")">Click here</a> to login!
 </p>
 
-<p>
-    @Html.RouteLink("Click here", "login") to login!
-</p>
+@{
+    ViewBag.Title = "Posts";
+}
+
+@Html.Partial("_Posts", Model.Posts)

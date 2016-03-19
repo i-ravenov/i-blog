@@ -68,7 +68,7 @@ namespace i_blog.Areas.Admin.Controllers
                 {
                     Id = tag.TagId,
                     Name = tag.Name,
-                    IsChecked = true        // must be reimplemented !!!
+                    IsChecked = false        // must be reimplemented !!!
                 }).ToList()
             });
         }

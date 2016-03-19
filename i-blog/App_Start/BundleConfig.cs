@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace i_blog
 {
@@ -27,8 +23,6 @@ namespace i_blog
 
             bundles.Add(new ScriptBundle("~/admin/post/scripts")
                 .Include("~/areas/admin/scripts/posteditor.js"));
-
-
 
             bundles.Add(new ScriptBundle("~/scripts")
                .Include("~/scripts/jquery-2.2.0.js")

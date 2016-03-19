@@ -12,6 +12,16 @@ namespace i_blog
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("TagForReaThisTime", "tag/{idAndSlug}", new { Controller = "Posts", action = "Tag" }, namespaces);
+
+            routes.MapRoute("Tag", "tag/{id}-{slug}", new { Controller = "Tags", action = "Show" }, namespaces);
+
+            routes.MapRoute("PostForReaThisTime", "post/{idAndSlug}", new { Controller = "Posts", action = "Show" },namespaces);
+
+            routes.MapRoute("Post", "post/{id}-{slug}", new { Controller = "Posts", action = "Show" }, namespaces);
+
+
+
             routes.MapRoute("Login", "login", new { Controller = "Auth", action = "Login" }, namespaces);
 
             routes.MapRoute("Logout", "logout", new { Controller = "Auth", action = "Logout" }, namespaces);
