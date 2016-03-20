@@ -25,6 +25,8 @@ namespace i_blog
             routes.MapRoute("Logout", "logout", new { Controller = "Auth", action = "Logout" }, namespaces);
 
             routes.MapRoute("Home", "", new { controller = "Posts", action = "Index" }, namespaces);
+
+            routes.MapRoute("Sidebar", "sidebar", new { controller = "Layout", action = "Sidebar" }, namespaces);
         }
     }
 }

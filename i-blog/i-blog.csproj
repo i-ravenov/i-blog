@@ -191,6 +191,7 @@
     <Content Include="Areas\Admin\Views\Users\_RoleEditor.cshtml" />
     <Content Include="Areas\Admin\Views\Posts\Form.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Frontend.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -198,6 +199,7 @@
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.timeago.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -217,6 +219,7 @@
     <Compile Include="Areas\Admin\ViewModels\Posts.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="DAL\BlogContext.cs" />
     <Compile Include="DAL\BlogInitializer.cs" />
@@ -242,6 +245,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Auth.cs" />
+    <Compile Include="ViewModels\Layout.cs" />
     <Compile Include="ViewModels\Posts.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +271,7 @@
     <Content Include="Views\Posts\_Post.cshtml" />
     <Content Include="Views\Posts\_Posts.cshtml" />
     <Content Include="Views\Posts\Tag.cshtml" />
+    <Content Include="Views\Layout\Sidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
