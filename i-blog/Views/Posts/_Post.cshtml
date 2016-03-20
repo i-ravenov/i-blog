@@ -1,7 +1,8 @@
 ﻿@model i_blog.Models.Post
 
 <article>
-    <h1><a href="@Url.RouteUrl("Post", new { Model.PostId, Model.Slug })">@Model.Title</a></h1>
+    <h1><a href="@Url.RouteUrl("Post", new {Model.PostId, Model.Slug})"> @Model.Title</a>
+    </h1>
     <div>
         @Html.Raw(Model.Content)
     </div>
@@ -10,10 +11,10 @@
             @foreach (var tag in Model.Tags)
             {
                 <li>
-                    <a class="badge" href="@Url.RouteUrl("Tag", new{tag.TagId, tag.Slug})">@tag.Name</a>
+                    <a class="badge" href="@Url.RouteUrl("tag", new {tag.TagId, tag.Slug})">@tag.Name</a>
                 </li>
             }
         </ul>
-        Posted: @((int)(DateTime.UtcNow - Model.CreatedAt).TotalMinutes) minutes ago
+        Posted: @((int) (DateTime.UtcNow - Model.CreatedAt).TotalMinutes) minutes ago
     </footer>
 </article>

@@ -14,13 +14,11 @@ namespace i_blog
 
             routes.MapRoute("TagForReaThisTime", "tag/{idAndSlug}", new { Controller = "Posts", action = "Tag" }, namespaces);
 
-            routes.MapRoute("Tag", "tag/{id}-{slug}", new { Controller = "Tags", action = "Show" }, namespaces);
+            routes.MapRoute("Tag", "tag/{tagid}-{slug}", new { Controller = "Tags", action = "Show" }, namespaces);
 
             routes.MapRoute("PostForReaThisTime", "post/{idAndSlug}", new { Controller = "Posts", action = "Show" },namespaces);
 
-            routes.MapRoute("Post", "post/{id}-{slug}", new { Controller = "Posts", action = "Show" }, namespaces);
-
-
+            routes.MapRoute("Post", "post/{postid}-{slug}", new { Controller = "Posts", action = "Show" }, namespaces);
 
             routes.MapRoute("Login", "login", new { Controller = "Auth", action = "Login" }, namespaces);
 
